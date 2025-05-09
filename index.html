@@ -1,16 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Finitup</title>
-  <style>
-    body { font-family: sans-serif; padding: 2em; background: #f4f4f4; }
-    h1 { color: #2c3e50; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finitup - AI-Powered Automated Stock Trading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00BCD4;
+            --text-color: #333;
+            --background-color: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Demo Section */
+        .demo {
+            padding: 100px 0;
+        }
+
+        .demo-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #e9ecef;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: var(--text-color);
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .feature-list li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mouse Light Effect */
+        .mouse-light {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,188,212,0.1) 0%, rgba(0,188,212,0) 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
-  <h1>Welcome to Finitup</h1>
-  <p>Finitup is building AI-driven tools for financial insight and automation.</p>
-  <p>Visit our GitHub: <a href="https://github.com/finitup">github.com/finitup</a></p>
+    <div class="mouse-light"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>AI-Powered Automated Stock Trading</h1>
+                <p>Let our smart AI handle your investments - from finding opportunities to making trades, all while keeping you informed</p>
+                <a href="#" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <h3>AI-Written Investment Reports</h3>
+                    <p>Our AI creates easy-to-read stock reports every day, personalized to your interests and goals.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <h3>Smarter Trade Suggestions from AI</h3>
+                    <p>Our AI learns from the market and recommends the best times to buy and sell—just like a personal advisor.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <h3>Hands-Free Auto Trading</h3>
+                    <p>You can set it and forget it—our system automatically executes trades for you based on the AI's plan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo">
+        <div class="container">
+            <h2 class="fade-in">See How It Works</h2>
+            <div class="demo-container fade-in">
+                <div class="chart-placeholder">
+                    Live Trading Dashboard Preview
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="fade-in text-center">Choose Your Plan</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in">
+                    <h3>Basic</h3>
+                    <div class="price">$0<span class="price-period">/month</span></div>
+                    <ul class="feature-list">
+                        <li>Weekly stock reports written by our AI</li>
+                        <li>Simple market trend overview</li>
+                        <li>Basic trading suggestions</li>
+                    </ul>
+                    <a href="#" class="cta-button">Get Started</a>
+                </div>
+                <div class="pricing-card fade-in">
+                    <h3>Pro</h3>
+                    <div class="price">$29<span class="price-period">/month</span></div>
+                    <ul class="feature-list">
+                        <li>Daily stock reports and insights</li>
+                        <li>Up-to-the-minute trading advice</li>
+                        <li>Automatic trading handled for you</li>
+                        <li>Priority customer support</li>
+                    </ul>
+                    <a href="#" class="cta-button">Get Started</a>
+                </div>
+                <div class="pricing-card fade-in">
+                    <h3>Enterprise</h3>
+                    <div class="price">Contact Us</div>
+                    <ul class="feature-list">
+                        <li>We adjust the system to fit your unique needs</li>
+                        <li>Smarter ways to grow and protect your investments</li>
+                        <li>Instant alerts via email or Slack</li>
+                        <li>Your own dedicated support manager</li>
+                    </ul>
+                    <a href="#" class="cta-button">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="fade-in">
+                    <h4>Finitup</h4>
+                    <p>Smart Investing Made Simple</p>
+                </div>
+                <div class="fade-in">
+                    <h4>Contact</h4>
+                    <p>Email: contact@finitup.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mouse light effect
+        document.addEventListener('mousemove', (e) => {
+            const light = document.querySelector('.mouse-light');
+            light.style.left = e.clientX + 'px';
+            light.style.top = e.clientY + 'px';
+        });
+
+        // Fade-in animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach((element) => {
+            observer.observe(element);
+        });
+    </script>
 </body>
-</html>
+</html> 
