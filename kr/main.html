@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finitup - AI 기반 자동 주식 리포트 & 실험적 예측 시스템</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        // Check if this is the first visit
+        if (!localStorage.getItem('languagePreference')) {
+            // Check browser language
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            // If browser language is not Korean, redirect to English version
+            if (!browserLang.startsWith('ko')) {
+                // Redirect to English version
+                window.location.href = '../en/main.html';
+            }
+            
+            // If not redirected, set Korean as preference
+            localStorage.setItem('languagePreference', 'ko');
+        }
+    </script>
+    <style>
+        :root {
+            --primary-color: #00BCD4;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .warning-banner {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #ffeeba;
+        }
+
+        .warning-banner p {
+            margin: 0;
+        }
+
+        .language-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .prediction-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .prediction-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .prediction-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+
+        .prediction-value.negative {
+            color: #e74c3c;
+        }
+
+        .bilingual-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .bilingual-text .ko {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .bilingual-text .en {
+            font-family: 'Inter', sans-serif;
+            color: #666;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .prediction-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-banner">
+        <p class="ko">⚠ 본 플랫폼은 실험적 알고리즘 DSS로서 정보시스템(IS) 연구 기반으로 운영되며, 투자 조언이 아닙니다.</p>
+        <p class="en">⚠ This platform operates as an experimental algorithmic DSS based on Information Systems (IS) research and is not investment advice.</p>
+    </div>
+
+    <a href="../en/main.html" class="language-switch">English</a>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Finitup</h1>
+            <div class="bilingual-text">
+                <p class="ko">AI 기반 자동 주식 리포트 & 실험적 예측 시스템</p>
+                <p class="en">AI-Powered Stock Reports & Experimental Prediction System</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title">일일 리포트 / Daily Reports</h2>
+            <div class="card">
+                <h3>2024년 3월 20일 리포트 / March 20, 2024 Report</h3>
+                <div class="bilingual-text">
+                    <p class="ko">오늘의 시장 동향과 주요 종목 분석을 제공합니다. AI 알고리즘이 생성한 리포트는 실험적 연구 목적으로 제공되며, 투자 결정의 근거로 사용하지 마시기 바랍니다.</p>
+                    <p class="en">Today's market trends and key stock analysis. The AI-generated reports are provided for experimental research purposes and should not be used as a basis for investment decisions.</p>
+                </div>
+                <div class="bilingual-text">
+                    <a href="#" style="color: var(--primary-color); text-decoration: none;">전체 리포트 보기 →</a>
+                    <a href="#" style="color: var(--primary-color); text-decoration: none;">View Full Report →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">주요 종목 예측 / Key Stock Predictions</h2>
+            <div class="prediction-grid">
+                <div class="prediction-card">
+                    <h3>삼성전자 / Samsung Electronics</h3>
+                    <p class="prediction-value">+2.3%</p>
+                    <div class="bilingual-text">
+                        <p class="ko">예상 변동폭</p>
+                        <p class="en">Expected Movement</p>
+                    </div>
+                </div>
+                <div class="prediction-card">
+                    <h3>SK하이닉스 / SK Hynix</h3>
+                    <p class="prediction-value negative">-1.5%</p>
+                    <div class="bilingual-text">
+                        <p class="ko">예상 변동폭</p>
+                        <p class="en">Expected Movement</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">프로젝트 소개 / About the Project</h2>
+            <div class="card">
+                <div class="bilingual-text">
+                    <p class="ko">Finitup은 정보시스템(IS) 연구를 위한 실험적 프로토타입입니다. LLM과 강화학습 알고리즘을 활용하여 주식 시장 데이터를 분석하고 예측 모델을 개발하고 있습니다.</p>
+                    <p class="en">Finitup is an experimental prototype for Information Systems (IS) research. We utilize LLM and reinforcement learning algorithms to analyze stock market data and develop prediction models.</p>
+                </div>
+                <div class="bilingual-text">
+                    <p class="ko">본 플랫폼은 상업적 목적이 아닌 학술 연구를 위해 설계되었으며, 모든 데이터와 예측은 실험적 성격을 가집니다.</p>
+                    <p class="en">This platform is designed for academic research purposes, not commercial use. All data and predictions are experimental in nature.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="bilingual-text">
+                <p class="ko">© 2024 Finitup - 한국 등록 실험적 플랫폼</p>
+                <p class="en">© 2024 Finitup - Korean Registered Experimental Platform</p>
+            </div>
+            <div class="bilingual-text">
+                <p class="ko">알고리즘 DSS 연구용 프로토타입</p>
+                <p class="en">Algorithmic DSS Research Prototype</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
