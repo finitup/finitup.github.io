@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect to Finitup - Sign Up or Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00BCD4;
+            --text-color: #333;
+            --background-color: #fff;
+            --error-color: #ff4444;
+            --success-color: #00C851;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(120deg, #e0f7fa 0%, #f8f9fa 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: #666;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: -2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #eee;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2);
+        }
+
+        .social-auth {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .social-auth p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-button {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #eee;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-button:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .social-button img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .auth-footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .auth-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>Welcome to Finitup</h1>
+            <p>Connect your account to get started</p>
+        </div>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">Login</div>
+            <div class="auth-tab" data-tab="signup">Sign Up</div>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" required>
+                <div class="error-message">Please enter a valid email address</div>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+                <div class="error-message">Password is required</div>
+            </div>
+            <button type="submit" class="auth-button">Login</button>
+        </form>
+
+        <form id="signupForm" class="auth-form" style="display: none;">
+            <div class="form-group">
+                <label for="signupName">Full Name</label>
+                <input type="text" id="signupName" required>
+                <div class="error-message">Please enter your name</div>
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" required>
+                <div class="error-message">Please enter a valid email address</div>
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" required>
+                <div class="error-message">Password must be at least 8 characters</div>
+            </div>
+            <button type="submit" class="auth-button">Create Account</button>
+        </form>
+
+        <div class="social-auth">
+            <p>Or continue with</p>
+            <div class="social-buttons">
+                <button class="social-button">
+                    <img src="https://www.google.com/favicon.ico" alt="Google">
+                    Google
+                </button>
+                <button class="social-button">
+                    <img src="https://www.apple.com/favicon.ico" alt="Apple">
+                    Apple
+                </button>
+            </div>
+        </div>
+
+        <div class="auth-footer">
+            <p>By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        const tabs = document.querySelectorAll('.auth-tab');
+        const forms = document.querySelectorAll('.auth-form');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show corresponding form
+                const formId = tab.dataset.tab + 'Form';
+                forms.forEach(form => {
+                    form.style.display = form.id === formId ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Form validation
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+
+        function showError(input, message) {
+            const formGroup = input.parentElement;
+            const error = formGroup.querySelector('.error-message');
+            error.textContent = message;
+            error.style.display = 'block';
+            input.style.borderColor = 'var(--error-color)';
+        }
+
+        function clearError(input) {
+            const formGroup = input.parentElement;
+            const error = formGroup.querySelector('.error-message');
+            error.style.display = 'none';
+            input.style.borderColor = '#eee';
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail');
+            const password = document.getElementById('loginPassword');
+            let isValid = true;
+
+            if (!email.value) {
+                showError(email, 'Email is required');
+                isValid = false;
+            } else {
+                clearError(email);
+            }
+
+            if (!password.value) {
+                showError(password, 'Password is required');
+                isValid = false;
+            } else {
+                clearError(password);
+            }
+
+            if (isValid) {
+                // Here you would typically make an API call to your backend
+                console.log('Login attempt:', { email: email.value, password: password.value });
+            }
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName');
+            const email = document.getElementById('signupEmail');
+            const password = document.getElementById('signupPassword');
+            let isValid = true;
+
+            if (!name.value) {
+                showError(name, 'Name is required');
+                isValid = false;
+            } else {
+                clearError(name);
+            }
+
+            if (!email.value) {
+                showError(email, 'Email is required');
+                isValid = false;
+            } else {
+                clearError(email);
+            }
+
+            if (!password.value) {
+                showError(password, 'Password is required');
+                isValid = false;
+            } else if (password.value.length < 8) {
+                showError(password, 'Password must be at least 8 characters');
+                isValid = false;
+            } else {
+                clearError(password);
+            }
+
+            if (isValid) {
+                // Here you would typically make an API call to your backend
+                console.log('Signup attempt:', {
+                    name: name.value,
+                    email: email.value,
+                    password: password.value
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
