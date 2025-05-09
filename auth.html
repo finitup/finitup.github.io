@@ -36,6 +36,7 @@
             background: linear-gradient(120deg, #e0f7fa 0%, #f8f9fa 100%);
             position: relative;
             overflow-x: hidden;
+            padding-top: 48px;
         }
 
         /* Animated Background */
@@ -110,37 +111,49 @@
             transform: scale(1.05);
         }
 
-        /* Launch Message */
+        /* Enhanced Launch Message */
         .launch-message {
-            background: linear-gradient(135deg, var(--secondary-light) 0%, var(--primary-light) 100%);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
             opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 0.3s;
+            transform: translateY(-100%);
+            animation: slideDown 0.6s ease forwards;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .launch-message p {
             margin: 0;
-            color: var(--text-color);
-            font-size: 0.95rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
             line-height: 1.5;
         }
 
         .launch-message .emoji {
             font-size: 1.5rem;
+            animation: bounce 2s infinite;
         }
 
-        @keyframes fadeInUp {
+        @keyframes slideDown {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         /* Header Styles */
@@ -460,25 +473,31 @@
             }
 
             .launch-message {
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem;
+                padding: 0.75rem 1rem;
+            }
+
+            .launch-message p {
+                font-size: 0.95rem;
+            }
+
+            body {
+                padding-top: 40px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="launch-message">
+        <span class="emoji">🚀</span>
+        <p>We're building something exciting. Finitup is currently in development. Stay tuned for our official launch!</p>
+    </div>
+
     <div class="animated-bg"></div>
     
     <div class="auth-wrapper">
         <div class="auth-container">
             <div class="logo-container">
                 <img src="logo/FinItUp_HighRes_logo.png" alt="Finitup Logo">
-            </div>
-
-            <div class="launch-message">
-                <span class="emoji">🚀</span>
-                <p>We're building something exciting. Finitup is currently in development. Stay tuned for our official launch!</p>
             </div>
 
             <div class="auth-header">
