@@ -12,6 +12,9 @@
     <style>
         :root {
             --primary-color: #00BCD4;
+            --primary-light: rgba(0, 188, 212, 0.1);
+            --secondary-color: #6A5ACD;
+            --secondary-light: rgba(106, 90, 205, 0.1);
             --text-color: #333;
             --background-color: #fff;
         }
@@ -58,10 +61,20 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            display: flex;
+            align-items: center;
             text-decoration: none;
+            gap: 1rem;
+        }
+
+        .logo img {
+            width: 160px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
         }
 
         nav ul {
@@ -136,10 +149,16 @@
             color: #666;
         }
 
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
         .cta-button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.2);
             display: inline-block;
             padding: 1rem 2rem;
-            background-color: var(--primary-color);
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -148,8 +167,7 @@
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2);
+            box-shadow: 0 6px 20px rgba(0, 188, 212, 0.3);
         }
 
         /* Features Section */
@@ -166,7 +184,8 @@
         }
 
         .feature-card {
-            background: white;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+            backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -235,7 +254,8 @@
         }
 
         .pricing-card {
-            background: white;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+            backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -427,6 +447,10 @@
                 font-size: 2.5rem;
             }
 
+            .logo img {
+                width: 120px;
+            }
+
             .features-grid,
             .pricing-grid {
                 grid-template-columns: 1fr;
@@ -438,6 +462,23 @@
 
             nav ul {
                 display: none;
+            }
+
+            .launch-message {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+                margin: 1.5rem 1rem;
+            }
+
+            .launch-message p {
+                font-size: 1rem;
+            }
+
+            .waitlist-button {
+                margin: 1rem 0 0 0;
+                display: block;
+                text-align: center;
             }
         }
 
@@ -451,6 +492,58 @@
             transform: translate(-50%, -50%);
             z-index: 1;
         }
+
+        /* Launch Message */
+        .launch-message {
+            background: linear-gradient(135deg, var(--secondary-light) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .launch-message p {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .launch-message .emoji {
+            font-size: 1.8rem;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Waitlist Button */
+        .waitlist-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .waitlist-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(106, 90, 205, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -459,7 +552,9 @@
     <!-- Navigation Bar -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">Finitup</a>
+            <a href="#" class="logo">
+                <img src="/assets/FinItUp_HighRes_logo.png" alt="Finitup Logo">
+            </a>
             <ul>
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#features">Features</a></li>
@@ -471,16 +566,23 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <!-- Animated gradient overlay -->
         <div class="hero-bg-animated"></div>
         <div class="container">
             <div class="hero-content fade-in">
                 <h1>AI-Powered Automated Stock Trading</h1>
                 <p>Let our smart AI handle your investments - from finding opportunities to making trades, all while keeping you informed</p>
-                <a href="auth.html" class="cta-button">Get Started</a>
+                <div class="hero-buttons">
+                    <a href="auth.html" class="cta-button">Get Started</a>
+                    <a href="#waitlist" class="waitlist-button">Join the Waitlist</a>
+                </div>
             </div>
         </div>
     </section>
+
+    <div class="launch-message">
+        <span class="emoji">🚀</span>
+        <p>We're building something exciting. Finitup is currently in development. Stay tuned for our official launch!</p>
+    </div>
 
     <!-- Features Section -->
     <section class="features" id="features">
