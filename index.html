@@ -25,12 +25,52 @@
             line-height: 1.6;
             color: var(--text-color);
             overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-top: 60px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
         }
 
         /* Hero Section */
@@ -128,6 +168,14 @@
             color: #666;
         }
 
+        .chart-placeholder img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto;
+        }
+
         /* Pricing Section */
         .pricing {
             padding: 100px 0;
@@ -190,6 +238,77 @@
             left: 0;
         }
 
+        /* Duplicate CTA Section below Pricing */
+        .pricing-cta {
+            text-align: center;
+            margin: 3rem 0 0 0;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .accordion-item button {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-item button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .accordion-item button::after {
+            content: '+';
+            position: absolute;
+            right: 1rem;
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item button.active::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1rem;
+            color: #444;
+        }
+
+        .accordion-content p {
+            padding: 1rem 0;
+        }
+
         /* Footer */
         footer {
             background: #333;
@@ -242,8 +361,20 @@
 <body>
     <div class="mouse-light"></div>
 
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content fade-in">
                 <h1>AI-Powered Automated Stock Trading</h1>
@@ -254,7 +385,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section class="features" id="features">
         <div class="container">
             <div class="features-grid">
                 <div class="feature-card fade-in">
@@ -274,19 +405,19 @@
     </section>
 
     <!-- Demo Section -->
-    <section class="demo">
+    <section class="demo" id="demo">
         <div class="container">
             <h2 class="fade-in">See How It Works</h2>
             <div class="demo-container fade-in">
                 <div class="chart-placeholder">
-                    Live Trading Dashboard Preview
+                    <img src="/assets/demo-chart.png" alt="Preview of Finitup's AI Trading Dashboard" />
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing">
+    <section class="pricing" id="pricing">
         <div class="container">
             <h2 class="fade-in text-center">Choose Your Plan</h2>
             <div class="pricing-grid">
@@ -323,11 +454,41 @@
                     <a href="#" class="cta-button">Contact Sales</a>
                 </div>
             </div>
+            <div class="pricing-cta">
+                <a href="#" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button type="button">How does Finitup's AI decide when to trade?</button>
+                    <div class="accordion-content">
+                        <p>Our AI analyzes market trends, historical data, and real-time news to make informed trading decisions tailored to your investment goals.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button type="button">Is my investment secure with automated trading?</button>
+                    <div class="accordion-content">
+                        <p>Yes, we use advanced security protocols and risk management strategies to protect your investments and minimize potential losses.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button type="button">Can I customize the trading strategy?</button>
+                    <div class="accordion-content">
+                        <p>Absolutely! Our platform allows you to set preferences and risk levels, ensuring the AI trades according to your comfort and goals.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="fade-in">
@@ -366,6 +527,23 @@
         document.querySelectorAll('.fade-in').forEach((element) => {
             observer.observe(element);
         });
+
+        // Accordion functionality
+        const accordionButtons = document.querySelectorAll('.accordion-item button');
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const isActive = button.classList.contains('active');
+                accordionButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.nextElementSibling.style.maxHeight = null;
+                });
+                if (!isActive) {
+                    button.classList.add('active');
+                    const content = button.nextElementSibling;
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
     </script>
 </body>
-</html> 
+</html>
