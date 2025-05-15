@@ -1,0 +1,204 @@
+&lt;!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Reports | Finitup</title>
+  <meta name="description" content="Browse AI-generated market reports and analysis for major stocks.">
+  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body class="font-sans bg-white text-gray-900 min-h-screen flex flex-col">
+  &lt;!-- Header/Navigation -->
+  <header class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a href="./index.html" class="flex-shrink-0 flex items-center">
+            <img class="h-8 w-auto" src="./assets/logo.svg" alt="Finitup Logo">
+            <span class="ml-2 text-xl font-bold text-primary-800">Finitup</span>
+          </a>
+        </div>
+        
+        <nav class="hidden md:ml-6 md:flex md:space-x-8">
+          <a href="./strategies.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium">Strategies</a>
+          <a href="./reports.html" class="text-primary-600 border-b-2 border-primary-600 px-3 py-2 text-sm font-medium">Reports</a>
+          <a href="./predictions.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium">Predictions</a>
+          <a href="./research.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium">Research</a>
+          <a href="./survey.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium">Survey</a>
+          <a href="./contact.html" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium">Contact</a>
+        </nav>
+        
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      &lt;!-- Mobile menu, show/hide based on menu state -->
+      <div id="mobile-menu" class="md:hidden hidden">
+        <div class="pt-2 pb-3 space-y-1">
+          <a href="./strategies.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Strategies</a>
+          <a href="./reports.html" class="block pl-3 pr-4 py-2 text-base font-medium text-primary-600 bg-primary-50">Reports</a>
+          <a href="./predictions.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Predictions</a>
+          <a href="./research.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Research</a>
+          <a href="./survey.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Survey</a>
+          <a href="./contact.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  &lt;!-- Main Content -->
+  <main class="flex-grow">
+    &lt;!-- Header -->
+    <section class="bg-primary-600 text-white py-12">
+      <div class="container mx-auto px-4 md:px-6">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">AI-Generated Market Reports</h1>
+        <p class="text-lg opacity-90 max-w-3xl">
+          Browse our collection of AI-generated reports on major stocks. These reports combine technical analysis, fundamental data, and market sentiment to provide comprehensive insights.
+        </p>
+      </div>
+    </section>
+
+    &lt;!-- Filter Section -->
+    <section class="py-8 bg-gray-50">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="flex flex-col md:flex-row gap-4 items-start md:items-center">
+          <div class="w-full md:w-64">
+            <label for="ticker-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Ticker</label>
+            <select id="ticker-filter" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+              <option value="all" selected>All Tickers</option>
+              <option value="AAPL">AAPL</option>
+              <option value="NVDA">NVDA</option>
+              <option value="TSLA">TSLA</option>
+            </select>
+          </div>
+          
+          <div class="w-full md:w-64">
+            <label for="type-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Type</label>
+            <select id="type-filter" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+              <option value="all" selected>All Types</option>
+              <option value="Quarterly">Quarterly</option>
+              <option value="Technical">Technical</option>
+              <option value="Forecast">Forecast</option>
+              <option value="Analysis">Analysis</option>
+            </select>
+          </div>
+          
+          <div class="w-full md:w-64">
+            <label for="sort-by" class="block text-sm font-medium text-gray-700 mb-1">Sort by</label>
+            <select id="sort-by" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+              <option value="date" selected>Date (Newest First)</option>
+              <option value="title">Title (A-Z)</option>
+              <option value="ticker">Ticker</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    &lt;!-- Reports List -->
+    <section class="py-12">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          &lt;!-- Report 1 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
+            <div class="p-4">
+              <div class="flex justify-between items-start mb-2">
+                <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded-full">AAPL</span>
+                <span class="text-xs text-gray-500">Quarterly</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">AAPL Q2 2023 Analysis</h3>
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>2023-06-15</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span class="text-sm">1.2 MB</span>
+                </div>
+                <a href="./reports/aapl-q2-2023.pdf" class="flex items-center text-primary-600 hover:text-primary-800 font-medium" download>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          &lt;!-- Report 2 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
+            <div class="p-4">
+              <div class="flex justify-between items-start mb-2">
+                <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded-full">NVDA</span>
+                <span class="text-xs text-gray-500">Technical</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">NVDA Growth Analysis</h3>
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>2023-06-10</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span class="text-sm">0.9 MB</span>
+                </div>
+                <a href="./reports/nvda-growth-2023.pdf" class="flex items-center text-primary-600 hover:text-primary-800 font-medium" download>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          &lt;!-- Report 3 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
+            <div class="p-4">
+              <div class="flex justify-between items-start mb-2">
+                <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded-full">TSLA</span>
+                <span class="text-xs text-gray-500">Production</span>
+              </div>
+              <h3
