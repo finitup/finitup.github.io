@@ -1,4 +1,4 @@
-"use client"
+// React 컴포넌트 정의
 
 function Button({ children, variant = "primary", className = "", ...props }) {
   const baseClasses = "inline-flex items-center justify-center px-5 py-2.5 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"

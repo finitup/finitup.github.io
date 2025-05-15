@@ -1,6 +1,4 @@
-"use client"
-
-import React from "react"
+// React 컴포넌트 정의
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
